@@ -1,0 +1,133 @@
+﻿<div class="alpha-controls" id="alpha-controls">
+	<div class="letter" id="see-all" onclick="alpha.search('');" style="display:none;">See All</div>
+	<div class="letter" id="letter-a" onclick="alpha.search('a');">a</div>
+	<div class="letter" id="letter-b" onclick="alpha.search('b');">b</div>
+	<div class="letter" id="letter-c" onclick="alpha.search('c');">c</div>
+	<div class="letter" id="letter-d" onclick="alpha.search('d');">d</div>
+	<div class="letter" id="letter-e" onclick="alpha.search('e');">e</div>
+	<div class="letter" id="letter-f" onclick="alpha.search('f');">f</div>
+	<div class="letter" id="letter-g" onclick="alpha.search('g');">g</div>
+	<div class="letter" id="letter-h" onclick="alpha.search('h');">h</div>
+	<div class="letter" id="letter-i" onclick="alpha.search('i');">i</div>
+	<div class="letter" id="letter-j" onclick="alpha.search('j');">j</div>
+	<div class="letter" id="letter-k" onclick="alpha.search('k');">k</div>
+	<div class="letter" id="letter-l" onclick="alpha.search('l');">l</div>
+	<div class="letter" id="letter-m" onclick="alpha.search('m');">m</div>
+	<div class="letter" id="letter-n" onclick="alpha.search('n');">n</div>
+	<div class="letter" id="letter-o" onclick="alpha.search('o');">o</div>
+	<div class="letter" id="letter-p" onclick="alpha.search('p');">p</div>
+	<div class="letter" id="letter-p" onclick="alpha.search('q');">q</div>
+	<div class="letter" id="letter-r" onclick="alpha.search('r');">r</div>
+	<div class="letter" id="letter-s" onclick="alpha.search('s');">s</div>
+	<div class="letter" id="letter-t" onclick="alpha.search('t');">t</div>
+	<div class="letter" id="letter-u" onclick="alpha.search('u');">u</div>
+	<div class="letter" id="letter-v" onclick="alpha.search('v');">v</div>
+	<div class="letter" id="letter-w" onclick="alpha.search('w');">w</div>
+	<div class="letter" id="letter-x" onclick="alpha.search('x');">x</div>
+	<div class="letter" id="letter-y" onclick="alpha.search('y');">y</div>
+	<div class="letter" id="letter-z" onclick="alpha.search('z');">z</div>
+</div>
+
+<script>
+
+(function() {
+
+window.alpha = window.alpha || {};
+
+alpha.globals = {
+	"queryParamLastName": "LastName",
+	"queryParamKeyword": "k"
+}
+
+alpha.gup = function(name){
+
+	  name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+	  var regexS = "[\\?&]"+name+"=([^&#]*)";
+	  var regex = new RegExp( regexS );
+	  var results = regex.exec( window.location.href );
+	  if( results == null )
+	    return "";
+	  else
+	    return results[1];
+}
+
+alpha.search = function(letter) {
+	
+	var query = "";
+	
+	if(letter.length > 0) {
+		query = "?" + alpha.globals.queryParamKeyword + "=" + alpha.globals.queryParamLastName + ":" + letter;
+		window.location = window.location.pathname + query;
+	}
+}
+
+alpha.highlightLetter = function(letter) {
+
+	var currentLetterId = "letter-" + letter;
+	var currentLetter = document.getElementById(currentLetterId);
+	if(!currentLetter) return;
+	currentLetter.className = currentLetter.className + " active";
+}
+
+alpha.init = function() {
+
+	var queryParam = alpha.gup(alpha.globals.queryParamKeyword);
+	if(queryParam.indexOf(alpha.globals.queryParamLastName) != -1) {
+		var letterParam = queryParam.substring(queryParam.length-1);
+		alpha.highlightLetter(letterParam);
+	}
+}
+
+})();
+
+_spBodyOnLoadFunctionNames.push(alpha.init());
+
+</script>
+
+<style>
+#CSR.srch-WPBody .psrch-results .psrch-FirstFullResult, #CSR.srch-WPBody .psrch-results .psrch-FullResult {
+  display: inline-block;
+  float: left;
+  border: 1px solid #ccc;
+  padding: 0;
+  margin: 10px;
+  padding: 10px;
+  -webkit-box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.3);
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.3);
+}
+
+#CSR.srch-WPBody .psrch-results .psrch-FirstFullResult #UserPhoto, #CSR.srch-WPBody .psrch-results .psrch-FullResult #UserPhoto {
+  display: block;
+  float: none;
+  width: auto;
+  text-align: center;
+}
+
+#CSR.srch-WPBody .psrch-results .psrch-FirstFullResult #UserPhoto > a, #CSR.srch-WPBody .psrch-results .psrch-FullResult #UserPhoto > a {
+  margin: 0 auto;
+}
+
+.alpha-controls {
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+.alpha-controls .letter {
+  float: left;
+  min-width: 16px;
+  text-align: center;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding: 6px 10px;
+  cursor: pointer;
+  background-color: #005a84;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.alpha-controls .letter:hover, .alpha-controls .letter.active {
+  background-color: #13b5ea;
+}
+</style>
+

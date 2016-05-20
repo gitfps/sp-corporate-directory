@@ -1,0 +1,98 @@
+$grey: #e1e1e1;
+$primaryColor: #2980b9;
+$secondaryColor: #9b59b6; 
+
+.ms-srch-people-outerContainer {
+	width: 200px;
+	height: 200px;
+	display: inline-block;
+	border: 1px solid $grey;
+	margin: 0 15px 15px 0;
+	padding: 10px;
+	vertical-align: top;
+
+	.ms-srch-people-item {
+		width: auto;
+		padding: 0;
+		min-height: none;
+		overflow: visible;
+	}
+
+	#UserPersonaContainer {
+		text-align: center;
+		width: 100%;
+		margin-bottom: 5px;
+
+		#UserPersona {
+			.ms-table {
+				margin: 0 auto;
+			}
+		}
+	}
+
+	#UserInfoContainer {
+		width: 100%;
+		margin: 0;
+		float: none;
+
+		.label {
+			font-weight: bold;
+			margin: 0 5px 0 0;
+			width: auto;
+		}
+
+		#NameField {
+			text-align: center;
+
+			a {
+				&, &:link, &:visited {
+					font-size: 18px;
+					color: $primaryColor;
+				}
+				&:hover {
+					color: $secondaryColor;
+				}
+			}
+		}
+
+		#JobTitleField {
+			text-align: center;
+			font-style: italic;
+			padding-top: 0;
+		}
+
+		#DepartmentField {
+			margin-top: 10px;
+		}
+
+		#MobilePhoneField,
+		#MoreInfoShort,
+		#MoreInfoLong,
+		#SelfSearchInfo,
+		.ms-srch-people-item-separator
+		 {
+			display: none;
+		}
+	}
+}
+
+.alpha-controls {
+	overflow: hidden; 
+	margin: 10px 0;
+
+	.letter {
+		float: left;
+		min-width: 16px;
+		text-align: center;
+		margin-right: 10px;
+		padding: 6px 10px;
+		cursor: pointer;
+		background-color: $primaryColor;
+		color: #fff;
+		text-transform: uppercase;
+
+		&:hover, &.active {
+			background-color: $secondaryColor;
+		}
+	}
+}
